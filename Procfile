@@ -1,0 +1,1 @@
+web: python cbsod-catalog/run.py

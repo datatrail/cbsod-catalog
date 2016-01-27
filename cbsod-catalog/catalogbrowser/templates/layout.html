@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>CBS Open Data with Python</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/>
+  <link rel="stylesheet" type="text/css" href="/static/css/custom.css">
+  <script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- header -->
+    <div class="row">
+      <br>
+      <h3>&nbsp;&nbsp;&nbsp;Demo CBS Open Data Services using Python - Catalog browser<a href="http://datatrail.github.io/"><img src="/static/img/logo.png" class="pull-right" width="20%"></a></h3>
+      
+    </div>
+    <!-- end header -->
+
+
+    <!-- navigationbar -->
+    <div class="row">
+      <div class="col-lg-12">
+      {% block navigationbar %}{% endblock %}
+
+      </div>
+    </div>
+    <!-- end navigationbar -->
+
+    <!-- breadcrumbs -->
+    <br>
+    <div class="row">
+      <div class="col-lg-12">
+        {% block breadcrumbs %}
+          <ul class="breadcrumb">
+            <li><a href="/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
+            <li><a href="/theme">Themes</a></li>
+            {% for theme_id in breadcrumbs %}
+              <li><a href="/theme/{{theme_id}}">{{tree.get_property('Themes',theme_id,'ID','Title')}}</a></li>
+                                                 
+            {% endfor %}
+          </ul>
+        {% endblock %}
+      </div>
+    </div>
+    <!-- end breadcrumbs -->
+
+    <!-- catalogtreee -->
+    <div class="row">
+      <div class="col-lg-3">
+        {% block catalogtree %}
+
+          <div class="list-group">
+            
+            <!-- parent -->
+            {% if  theme_id is none %}
+              <a href="/theme" class="list-group-item">
+                <small>&nbsp;Themes</small>
+              </a>
+            {% else %}
+              <a href="/theme/{{tree.get_property('Themes', theme_id, 'ID', 'ParentID')}}" class="list-group-item">
+                <small><span class="glyphicon glyphicon-chevron-left" aria-hidden="true">&nbsp;</span>{{tree.get_property('Themes', theme_id, 'ID', 'Title')}}</small>
+              </a>
+            {% endif %}
+
+            <!-- children-->
+            {% for child in children['Tables_Themes'] %}
+              <a href="/table/{{child['ID']}}" class="list-group-item">
+                <small>
+                  {{tree.get_property('Tables', child['TableID'], 'ID', 'Title')}}
+                </small>
+              </a>
+            {% endfor %}
+
+            {% for child in children['Themes'] %}
+              <a href="/theme/{{child['ID']}}" class="list-group-item">
+                <small>
+                  {{tree.get_property('Themes', child['ID'], 'ID', 'Title')}}
+                  <small><span class="glyphicon glyphicon-chevron-right" aria-hidden="true">&nbsp;</span></small>
+                  <!--&nbsp;&raquo;-->
+                </small>
+              </a>
+            {% endfor %}
+
+          </div>
+        {% endblock %}
+      </div>
+      <!-- end catalogtreee -->
+
+      <!-- empty column -->
+      <div class="col-lg-1"></div>
+      <!-- end empty column -->
+
+      <!-- contect -->
+      <div class="col-lg-8">
+        
+          {% block content %}default content{% endblock %}
+        
+      </div>
+      <!-- end content -->
+
+    </div>
+    
+  </div>
+
+  <!-- clearfix -->
+  <div class="clearfix visible-lg"></div>
+
+  </body>
+</html>

@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <style type="text/css" class="init">
+    div.dataTables_wrapper {
+      width: 800px;
+      margin: 0 auto;
+    }
+  </style>
+
+  <script type="text/javascript" class="init">
+    $(document).ready(function() {
+      $('#example').DataTable( {
+        "scrollX": true
+         } );
+    } );
+  </script>
+
+  <div class="alert alert-info" role="alert">{{tree.get_property('Tables', table_id, 'ID','Title')}} </div>
+  <br>
+  <ul class="nav nav-tabs">
+    {% if active_tab == "Description" %}
+      <li role="presentation" class="active"><a href="/table/{{tables_themes_id}}/Description"><small>Description</small></a></li>
+    {% else %}
+      <li role="presentation" ><a href="/table/{{tables_themes_id}}/Description"><small>Description</small></a></li>
+    {% endif %}
+    {% for collection in collections %}
+      {% if active_tab == collection %}
+        <li role="presentation" class="active"><a href="/table/{{tables_themes_id}}/{{collection}}"><small>{{collection}}</small></a></li>
+      {% else %}
+          <li role="presentation"><a href="/table/{{tables_themes_id}}/{{collection}}"><small>{{collection}}</small></a></li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+  <br>
+ 
+  {% if active_tab == "Description" %}
+    <pre>{{tree.get_property('Tables', table_id, 'ID', 'ShortDescription')}}</pre>
+  {% else %}
+    <small>
+      <table id="example" class="display nowrap table-striped" cellspacing="0" width="100%">
+        <thead>
+          <tr>
+             {% for property_name in table.feeds[active_tab].property_names %}
+              <th>{{property_name}}</th>
+            {% endfor %}
+         </tr>
+        </thead>
+        <tbody>
+          {% for entry in table.get_entries(active_tab) %}
+            <tr>
+              {% for property_name in table.feeds[active_tab].property_names %}
+                <td>{{entry[property_name]}}</td>
+              {% endfor %}
+
+            </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
+    </small>
+  {% endif %}
+
+<script type="text/javascript">
+  // For demo to fit into DataTables site builder...
+  $('#example')
+    .removeClass( 'display' )
+    .addClass('table table-striped table-bordered');
+</script>
+
+{% endblock %}

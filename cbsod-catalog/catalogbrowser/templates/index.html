@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>CBS Open Data with Python</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/>
+  <link rel="stylesheet" type="text/css" href="/static/css/custom.css">
+  <script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>
+</head>
+<body>
+  <div class="container">
+
+    <!-- header -->
+    <div class="row">
+        <a href="http://datatrail.github.io/"><img class="img-responsive displayed" src="/static/img/logo.png"></a>
+        <br>
+        <br>
+    </div>
+    <!-- end header -->
+
+    <!-- content -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="container">
+          <div class="jumbotron">
+            <h3>Demo CBS Open Data Services using Python - Catalog browser</h3>
+            <p>
+              <br>
+              <small>
+                <a href="http://opendata.cbs.nl/dataportaal/portal.html#_la=en" target="_blank">StatLine</a> is the electronic databank of <a href="http://www.cbs.nl/en-GB/menu/home/default.htm?Languageswitch=on" target="_blank">CBS (Statistics Netherlands)</a>. It enables users to compile their own tables and graphs. The information can be accessed, printed and downloaded free of charge.
+              </small>
+            </p>
+
+            <p>
+              <small>
+                StatLine is made available as Open Data via the <a href="http://www.odata.org/" target="_blank">ODATA</a> protocol. CBS published a <a href="http://www.cbs.nl/NR/rdonlyres/2561A2B7-CE51-47B9-A838-9968EF67FFB0/0/2014handleidingcbsopendataservices.pdf" target="_blank">tutorial</a> describing the Data Services provided and a <a href="http://www.cbs.nl/NR/rdonlyres/1C647C35-54E2-48A9-8FC0-BC851FB84E88/0/2014handleidingpowerpivotmetcbsopendatav2.pdf" target="_blank">tutorial</a> how to retrieve data using PowerPivot for Excel. 
+              </small>
+            </p>
+            <p>
+            <small>
+              The Data Services can also be consumed by other programs or languages. This demo shows how Python can be used to replicate (a simplified version of) the <a href="http://opendata.cbs.nl/dataportaal/portal.html#_la=en" target="_blank">CBS Open Data portal</a>. Users can browse the catalog, select a table and view the content of the table.
+            </small>
+            <p>
+            <small>
+              The application was build using Flask and <a href="https://github.com/datatrail/py2cbs" target="_blank">py2cbs</a>, a small client library for working with CBS (Netherlands Statistics) Open Data from within Python applications and from the command line.
+            </p>
+            <br>
+            <p><a class="btn btn-lg btn-primary" href="/theme">Start &raquo;</a></p>
+
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end content -->
+
+  </div>
+
+  <!-- clearfix -->
+  <div class="clearfix visible-lg"></div>
+
+  </body>
+</html>

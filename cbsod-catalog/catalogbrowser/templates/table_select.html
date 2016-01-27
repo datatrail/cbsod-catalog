@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  
+  <div class="alert alert-info" role="alert">
+    {% set tbl = tree.get_entry('Tables', table_id, 'ID') %}
+    {{tbl.Title}} ({{tbl.Identifier}})
+  </div>
+  
+  Table description <button type="button" class="btn btn-default btn-sm" data-toggle="collapse" data-target="#demo">show / hide</button>
+  <div id="demo" class="collapse">
+    <br>
+    <pre>
+      {{tree.get_property('Tables', table_id, 'ID', 'ShortDescription')}}
+    </pre>
+  </div>
+
+  <p><br>Select the tables you want to import data from:</p>
+
+  <form role="form" action="/table/{{tables_themes_id}}/Description" method="post">
+    <div class="form-group">
+      {% for collection in table.collections %}
+        <div class="checkbox">
+          <small>
+            <label>
+              <input type="checkbox" name="collections" value="{{collection}}" checked>
+              {{collection}}
+              {% if collection == 'UntypedDataSet' or collection == 'TypedDataSet' %}
+                (only top 100 rows)
+              {% endif %}
+            </label>
+          </small>
+        </div>
+      {% endfor %}
+
+    </div>
+    <div class="form-group">
+      <input id="submit" name="submit" type="submit" value="Send" class="btn btn-primary">
+    </div>
+  </form>
+{% endblock %}
